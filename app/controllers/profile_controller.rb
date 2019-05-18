@@ -1,4 +1,5 @@
 class ProfileController < ApplicationController
+	include InstopicsHelper
 	before_action :authenticate_user!
 
 	def index
@@ -11,17 +12,24 @@ class ProfileController < ApplicationController
 			})
 		end
 	end
+
+	def get_other
+		render json: get_user_data(params["id"])
+	end
 	
 	def get
-		render json: get_user_data
+		render json: get_user_data(current_user.id)
 	end
 
 	def update
 		current_user.profile.update_attributes(profile_params)
 		current_user.profile.avatar.purge
-		current_user.profile.avatar.attach({data: params[:avatar][:data], filename: params[:avatar][:filename] })
+		current_user.profile.avatar.attach({
+			data: params[:avatar][:data], 
+			filename: params[:avatar][:filename]
+		})
 		
-		render json: get_user_data
+		render json: get_user_data(current_user.id)
 	end
 
 	private
@@ -29,8 +37,12 @@ class ProfileController < ApplicationController
     params.require(:profile).permit(:name, :phone, :age, :sex)
 	end
 	
-	def get_user_data
-		url = !current_user.profile.avatar.nil? ? current_user.profile.avatar : ""
-		current_user.profile.attributes.merge({ avatar: url_for(url)})
+	def get_user_data(id)
+		user = User.find(id)
+		avatar = !user.profile.avatar.nil? ? user.profile.avatar : nil
+		user.profile.attributes.merge({ 
+			avatar: avatar.attachment.nil? ? "" : url_for(avatar),
+			instopics: get_intopics
+		})
 	end
 end

@@ -8,15 +8,19 @@ let app = new Vue({
 	el: "#profile",
 	data: {
 		user: "",
-		form: {
+		formUser: {
 			avatar: null,
 			name: "",
 			age: 0,
 			sex: ""
+		},
+		formInstopic: {
+			picture: "",
+			description: ""
 		}
 	},
 	methods: {
-		selectedFile(event) {
+		selectedUserAvatar(event) {
 			let file = event.target.files[0];
 			var fileSize = file.size / 1024 / 1024;
 			var reader = new FileReader();
@@ -24,15 +28,44 @@ let app = new Vue({
 			if (fileSize <= 2) {
 				reader.readAsDataURL(file);
 				reader.onload = () =>
-					(this.form.avatar = { data: reader.result, filename: file.name });
+					(this.formUser.avatar = { data: reader.result, filename: file.name });
 			} else {
-				alert("File is too big!");
+				alert("File is too big! Size > 2MB");
 			}
 		},
-		submit() {
-			http.put("/profile/update", this.form).then(data => (app.user = data));
+		selectedInstopic(event) {
+			let file = event.target.files[0];
+			var fileSize = file.size / 1024 / 1024;
+			var reader = new FileReader();
+
+			if (fileSize <= 10) {
+				reader.readAsDataURL(file);
+				reader.onload = () =>
+					(this.formInstopic.picture = {
+						data: reader.result,
+						filename: file.name
+					});
+			} else {
+				alert("File is too big! Size > 5MB");
+			}
+		},
+		submitEditUser() {
+			http
+				.put("/profile/update", this.formUser)
+				.then(data => (app.user = data));
+		},
+		submitAddInstopic() {
+			http
+				.post("/instopic/create", this.formInstopic)
+				.then(data => (app.user.instopics = data));
 		}
 	}
 });
 
-http.get("/profile/get").then(data => (app.user = data));
+let url = new URL(location.href);
+let id  = url.searchParams.get("id")
+if (id) {
+	http.get(`/profile/${id}`).then(data => (app.user = data));
+} else {
+	http.get("/profile/get").then(data => (app.user = data));
+}

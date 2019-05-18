@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_18_061522) do
+ActiveRecord::Schema.define(version: 2019_05_18_160114) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -35,8 +35,15 @@ ActiveRecord::Schema.define(version: 2019_05_18_061522) do
 
   create_table "coments", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "insttopic_id"
+    t.integer "instopic_id"
     t.text "coment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dislikes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "instopic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,8 +57,14 @@ ActiveRecord::Schema.define(version: 2019_05_18_061522) do
 
   create_table "instopics", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "likes"
-    t.integer "dislikes"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "instopic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
