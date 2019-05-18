@@ -1,5 +1,16 @@
-<h1>Profile#index</h1>
-<p>Find me in app/views/profile/index.html.erb</p>
 <div id="profile">
-  {{ message }}
+	<img :src="user.avatar" />
+	<span>{{ user.name }}</span>
+	<span>{{ user.phone }}</span>
+	<span>{{ user.age }}</span>
+	<span>{{ user.sex }}</span>
+	<form @submit.prevent="submit">
+		<input @change="selectedFile($event)" type="file" name="avatar" />
+		<input v-model="form.name" type="text" />
+		<input v-model="form.age" type="number" />
+		<input v-model="form.sex" type="text" />
+		<button type="submit">send</button>
+	</form>
 </div>
+<%= javascript_include_tag 'profile', 'data-turbolinks-track': 'reload', 'type':
+'module' %>
