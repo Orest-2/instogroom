@@ -1,0 +1,2 @@
+module ExploresHelper
+end

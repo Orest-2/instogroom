@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
 	include InstopicsHelper
+	include ProfileHelper
 	before_action :authenticate_user!
 
 	def index
@@ -35,14 +36,5 @@ class ProfileController < ApplicationController
 	private
   def profile_params
     params.require(:profile).permit(:name, :phone, :age, :sex)
-	end
-	
-	def get_user_data(id)
-		user = User.find(id)
-		avatar = !user.profile.avatar.nil? ? user.profile.avatar : nil
-		user.profile.attributes.merge({ 
-			avatar: avatar.attachment.nil? ? "" : url_for(avatar),
-			instopics: get_intopics
-		})
 	end
 end
