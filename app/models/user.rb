@@ -5,5 +5,5 @@ class User < ApplicationRecord
 				 :recoverable, :rememberable, :validatable
 	has_one :profile
 	has_many :instopics
-	has_many :followers
+	has_many :follows
 end
