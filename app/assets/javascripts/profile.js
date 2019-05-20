@@ -1,5 +1,6 @@
 import Vue from "https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.esm.browser.js";
 import { BASE_URL } from "/js/config.js";
+import { store } from "/js/store/store.js";
 import { HttpService } from "/js/services/HttpService.js";
 
 const http = new HttpService(BASE_URL);
@@ -7,7 +8,7 @@ const http = new HttpService(BASE_URL);
 let app = new Vue({
 	el: "#profile",
 	data: {
-		user: "",
+		store: store,
 		formUser: {
 			avatar: null,
 			name: "",
@@ -52,20 +53,20 @@ let app = new Vue({
 		submitEditUser() {
 			http
 				.put("/profile/update", this.formUser)
-				.then(data => (app.user = data));
+				.then(data => (store.user = data));
 		},
 		submitAddInstopic() {
 			http
 				.post("/instopic/create", this.formInstopic)
-				.then(data => (app.user.instopics = data));
+				.then(data => (store.user.instopics = data));
 		}
 	}
 });
 
 let url = new URL(location.href);
-let id  = url.searchParams.get("id")
+let id = url.searchParams.get("id");
 if (id) {
-	http.get(`/profile/${id}`).then(data => (app.user = data));
+	http.get(`/profile/other/${id}`).then(data => (store.user = data));
 } else {
-	http.get("/profile/get").then(data => (app.user = data));
+	http.get("/profile/get").then(data => (store.user = data));
 }

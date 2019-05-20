@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'profile', 						to: 'profile#index'
-  get 'profile/:id', 				to: 'profile#get_other'
+  get 'profile/other/:id', 	to: 'profile#get_other'
   get 'profile/get', 				to: 'profile#get'
 	put 'profile/update', 		to: 'profile#update'
 	
