@@ -1,3 +1,4 @@
 export const store = {
-	user: {}
+	user: {},
+	explore: []
 };
