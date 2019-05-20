@@ -4,7 +4,7 @@ module ProfileHelper
 		avatar = !user.profile.avatar.nil? ? user.profile.avatar : nil
 		user.profile.attributes.merge({ 
 			avatar: avatar.attachment.nil? ? "" : url_for(avatar),
-			instopics: get_intopics,
+			instopics: get_intopics(id),
 			followed: !current_user.follows.find_by(followed_id: id).nil?
 		})
 	end

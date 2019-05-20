@@ -9,10 +9,10 @@ Rails.application.routes.draw do
 	post 'instopic/create', 		to: 'instopics#create'
 	delete 'instopic/delete', 	to: 'instopics#delete'
 
-	get 'explores',	to: 'explores#index'
+	get 'explores',								to: 'explores#index'
 	get 'explores/all_profiles',	to: 'explores#get_all_profiles'
-	post 'explores/follow',	to: 'explores#follow'
-	post 'explores/unfollow',	to: 'explores#unfollow'
+	post 'explores/follow',				to: 'explores#follow'
+	post 'explores/unfollow',			to: 'explores#unfollow'
 
   root 'waterfall#index'
   devise_for :users

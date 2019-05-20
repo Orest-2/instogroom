@@ -8,7 +8,7 @@ class InstopicsController < ApplicationController
 			data: params[:picture][:data],
 			filename: params[:picture][:filename]
 		})
-		render json: get_intopics
+		render json: get_intopics(current_user.id)
 	end
 
 	def like
