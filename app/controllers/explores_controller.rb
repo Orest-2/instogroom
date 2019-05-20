@@ -15,7 +15,7 @@ class ExploresController < ApplicationController
 
 		render json: res
 	end
-	
+
 	def follow
 		id = params[:followed_id]
 		if current_user.follows.find_by(followed_id: id).nil?
@@ -25,7 +25,8 @@ class ExploresController < ApplicationController
 	end
 
 	def unfollow
-		followed = current_user.follows.find_by(followed_id: id).nil?
+		id = params[:followed_id]
+		followed = current_user.follows.find_by(followed_id: id)
 		if !followed.nil?
 			followed.destroy
 		end
