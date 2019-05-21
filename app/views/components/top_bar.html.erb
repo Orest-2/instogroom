@@ -19,20 +19,25 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div class="navbar-item" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav ml-auto">
 
-		  <button type="button" class="nav-items btn btn-outline-light text-dark" data-turbolinks="false"><a href="/explores" class="nav-link text-dark">Explores</a></button>
-			<button type="button" class="nav-items btn btn-outline-light text-dark" data-turbolinks="false"><a href="/" class="nav-link text-dark">Watterfall</a></button>
-			
-			<button type="button" class="nav-items btn btn-outline-light text-dark" data-turbolinks="false"><a href="/profile" class="nav-link text-dark">Add new instopic</a></button>
-		
+		  <li class="nav-item text-dark" data-turbolinks="false">
+				<a href="/explores" class="nav-link text-dark">Explores</a>
+			</li>
+			<li class="nav-item text-dark" data-turbolinks="false">
+				<a href="/" class="nav-link text-dark">Watterfall</a>
+			</li>
+			<li class="nav-item text-dark" data-turbolinks="false">
+				<a href="/profile" class="nav-link text-dark">Add new instopic</a>
+			</li>
+			<li class="nav-item text-dark" data-turbolinks="false">
+      	<a href="/" class="nav-link text-dark">
+					<img src="/assets/profile.png" width="30" height="30">
+				</a>
+    	</li>
 		</ul>
 	</div>
-	
-		<div class="navbar-profile">
-      <%= link_to image_tag("/assets/profile.png", size: "30x30"), root_path %>
-    </div>
 </nav>
 <%= javascript_include_tag 'topbar', 'data-turbolinks-track': 'reload', 'type':
 'module' %>
