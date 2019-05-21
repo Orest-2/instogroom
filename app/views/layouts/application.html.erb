@@ -3,10 +3,12 @@
   <head>
     <title>Instogroom</title>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
+		<%= csp_meta_tag %>
+		
+		<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
