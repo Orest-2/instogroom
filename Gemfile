@@ -33,6 +33,7 @@ gem 'active_storage_base64'
 
 gem 'pg', '0.18.1', group: :production
 gem 'rails_12factor', group: :production
+gem "google-cloud-storage", "~> 1.8", require: false
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
