@@ -1,0 +1,185 @@
+<div id="profile">
+	<header>
+		<div class="container" style="margin-top: 5rem;">
+			<div class="profile">
+				<div class="profile-image">
+					<img :src="store.user.avatar" v-if='store.user.avatar != ""' alt="" width="150" height="150" />
+					<img src="/assets/profile.png" v-else alt="" width="150" height="150" />
+				</div>
+
+				<div class="profile-user-settings">
+					<div class="row">
+						<div class="col text-center d-flex flex-row align-items-center justify-content-start">
+							<h5 class="profile-user-name" style="margin-bottom: 0rem;">
+								{{
+									store.user.name != ""
+										? store.user.name
+										: "You don't have name edit your profile"
+								}}
+							</h5>
+							<div class="dropdown" v-if="store.user.myProfile">
+								<button class="profile-edit-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									Settings
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<button class="dropdown-item" data-toggle="modal" data-target="#editProfileModal">Edit
+										profile</button>
+									<%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="profile-stats" style="margin-top: 1rem;">
+						<ul class="p-0">
+							<li>
+								<span class="profile-stat-count">{{
+								store.user.instopics.length
+							}}</span>
+								posts
+							</li>
+							<li>
+								<span class="profile-stat-count">{{
+								store.user.followersCount
+							}}</span>
+								followers
+							</li>
+							<li>
+								<span class="profile-stat-count">{{
+								store.user.followedCount
+							}}</span>
+								following
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- End of profile section -->
+			</div>
+			<!-- End of container -->
+	</header>
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12 col-md-12 mt-4 mb-4" v-for="instopic in store.user.instopics" :key="instopic.id">
+					<div class="panel panel-white post">
+						<div class="post-heading">
+							<div class="row">
+								<div class="col d-flex flex-row align-items-center">
+									<img v-if='instopic.avatar != ""' :src="instopic.avatar" class="img-circle avatar"
+										alt="user profile image">
+									<img v-else src="/assets/profile.png" style="width:30px; height:30px" class="img-circle avatar">
+									<div>
+										<div class="title h5">
+											<b>{{instopic.name != "" ? instopic.name : "No user name"}}</b>
+											uploaded a photo.
+										</div>
+										<h6 class="text-muted time"></h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="post-image">
+							<img src=""><img :src="instopic.picture" class="image" alt="image post">
+						</div>
+						<div class="post-description">
+							<p>{{instopic.description != "" ? instopic.description : "No description"}}</p>
+							<div class="row">
+								<div class="col text-center d-flex flex-row align-items-center justify-content-start">
+									<a class="btn btn-warning mr-2 p-2" data-toggle="collapse" :href=`#collapse${instopic.id}`
+										role="button" aria-expanded="false" :aria-controls=`collapse${instopic.id}`><i
+											class="fas fa-comments"></i></a>
+									<button @click="follow(instopic.user_id)" class="btn btn-primary mr-2 p-2" style="float:right;"><i
+											class="fas fa-user-minus"></i></button>
+									<button @click="like(instopic.id)" class="btn btn-success mr-2 p-2" style="float:right;"><i
+											class="fas fa-thumbs-up mr-2"></i><span
+											class="badge badge-light">{{ instopic.likes.length }}</span></button>
+									<button @click="dislike(instopic.id)" class="btn btn-danger p-2" style="float:right;"><i
+											class="fas fa-thumbs-down mr-2"></i><span
+											class="badge badge-light">{{ instopic.dislikes.length }}</span></button>
+								</div>
+							</div>
+						</div>
+						<div class="post-footer">
+							<form @submit.prevent="submitComment(instopic)">
+								<div class="input-group">
+									<input class="form-control mr-2" placeholder="Add a comment" type="text"
+										v-model="formComment.commentValue">
+									<span class="input-group-addon">
+										<button class="btn btn-warning" type="submit"><i class="fa fa-edit"></i></button>
+									</span>
+								</div>
+							</form>
+							<div class="collapse mt-2" :id=`collapse${instopic.id}`>
+								<div class="text-center" v-if="instopic.comments.length == 0">
+									<p>No comments</p>
+								</div>
+								<div v-else="instopic.comments.length > 0">
+									<ul class="comments-list">
+										<li class="comment" v-for="comment in instopic.comments">
+											<div class="row">
+												<div class="col d-flex align-items-center">
+													<a class="mr-3" href="javascript:void(0);">
+														<img class="avatar" v-if='comment.user_avatar != ""' :src="comment.user_avatar"
+															alt="avatar">
+														<img class="avatar" style="vertical-align: unset" v-else src="/assets/profile.png"
+															alt="avatar">
+													</a>
+													<div class="pt-2">
+														<div class="comment-heading">
+															<h4 class="user">{{comment.user_name != "" ? comment.user_name : "No user name"}}</h4>
+															<h5 class="time"></h5>
+														</div>
+														<p>{{comment.coment}}</p>
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of container -->
+	</main>
+	<!-- Modal -->
+	<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editProfileModalLabel">
+						Edit Profile
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<label>Avatar</label>
+						<file-pond name="avatar" ref="pond1" max-file-size="5MB"></file-pond>
+					</div>
+
+					<div class="form-group">
+						<label for="nameField">Name</label>
+						<input v-model="formUser.name" class="form-control" id="nameField" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						Close
+					</button>
+					<button type="button" @click="submitEditUser" class="btn btn-secondary">
+						Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%= javascript_include_tag 'profile', 'data-turbolinks-track': 'reload', 'type':
+'module' %>

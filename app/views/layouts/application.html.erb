@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Instogroom</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+	<head>
+		<title>Instogroom</title>
+		<%= csrf_meta_tags %> <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/filepond/dist/filepond.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+		/>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> 
+		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+			integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+			crossorigin="anonymous"
+		/>
+	</head>
 
-  <body>
-    <%= yield %>
-  </body>
+	<body>
+		<%= render template: "components/top_bar"%> <%= yield %>
+	</body>
 </html>
