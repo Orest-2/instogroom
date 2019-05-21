@@ -27,6 +27,12 @@ let app = new Vue({
 			}).then(data => {
 				getAllProfiles();
 			})
+		},
+		like(instopicId) {
+			http.get(`instopic/like/${instopicId}`).then(() => getAllProfiles());
+		},
+		dislike(instopicId) {
+			http.get(`instopic/dislike/${instopicId}`).then(() => getAllProfiles());
 		}
 	}
 });
