@@ -37,9 +37,16 @@ let app = new Vue({
 		dislike(instopicId) {
 			http.get(`/instopic/dislike/${instopicId}`).then(() => getAllProfiles(true));
 		},
-		submitComment(userName, instopicId) {
-			let comment = `${userName}, ${this.formComment.commentValue}`;
-			$(`#collapse${instopicId}`).collapse('show');
+		submitComment(instopic) {
+			let comment = `${instopic.name}, ${this.formComment.commentValue}`;
+			http.post(`/instopic/add_comment`, {
+				id: instopic.id,
+				comment
+			}).then(() => {
+				getAllProfiles(true)
+				// eslint-disable-next-line no-undef
+				$(`#collapse${instopic.id}`).collapse('show');
+			});
 		}
 	}
 });

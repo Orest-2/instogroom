@@ -2,21 +2,32 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xl-12 col-md-12 mt-4 mb-4" v-for="instopic in store.explore" :key="instopic.id">
-				<div class="card">
-					<img :src="instopic.picture" class="card-img-top" alt="instopic">
-					<div class="card-header">
+				<div class="panel panel-white post">
+					<div class="post-heading">
 						<div class="row">
 							<div class="col d-flex flex-row align-items-center">
-								<img :src="instopic.avatar" class="card-img-top p-2" alt=""
-									style="float:left; width:50px; height:50px; border-radius: 50%;">
-								<span class="card-text text-black-50 mr-4 p-2">{{ instopic.name }}</span>
+								<img v-if='instopic.avatar != ""' :src="instopic.avatar" class="img-circle avatar"
+									alt="user profile image">
+								<img v-else src="/assets/profile.png" style="width:30px; height:30px" class="img-circle avatar">
+								<div>
+									<div class="title h5">
+										<b>{{instopic.name}}</b>
+										uploaded a photo.
+									</div>
+									<h6 class="text-muted time"></h6>
+								</div>
 							</div>
-							<div class="col d-flex flex-row align-items-center">
-								<div class="card-text p-2">{{ instopic.description }}</div>
-							</div>
-							<div class="col text-center d-flex flex-row align-items-center justify-content-end">
+						</div>
+					</div>
+					<div class="post-image">
+						<img src=""><img :src="instopic.picture" class="image" alt="image post">
+					</div>
+					<div class="post-description">
+						<p>{{instopic.description != "" ? instopic.description : "No description"}}</p>
+						<div class="row">
+							<div class="col text-center d-flex flex-row align-items-center justify-content-start">
 								<a class="btn btn-primary mr-2 p-2" data-toggle="collapse" :href=`#collapse${instopic.id}` role="button"
-									aria-expanded="false" :aria-controls=`collapse${instopic.id}`>Comment</a>
+									aria-expanded="false" :aria-controls=`collapse${instopic.id}`>Comments</a>
 								<button @click="follow(instopic.user_id)" class="btn btn-primary mr-2 p-2" style="float:right;"><i
 										class="fas fa-user-minus"></i></button>
 								<button @click="like(instopic.id)" class="btn btn-success mr-2 p-2" style="float:right;"><i
@@ -28,32 +39,42 @@
 							</div>
 						</div>
 					</div>
-					<div class="card-body text-center">
-						<div class="row">
-							<div class="col">
-								<span class="card-text text-black-50 mr-4 p-2">Add new comment</span>
+					<div class="post-footer">
+						<form @submit.prevent="submitComment(instopic)">
+							<div class="input-group">
+								<input class="form-control mr-2" placeholder="Add a comment" type="text"
+									v-model="formComment.commentValue">
+								<span class="input-group-addon">
+									<button class="btn btn-warning" type="submit"><i class="fa fa-edit"></i></button>
+								</span>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<form class="mt-2" @submit.prevent="submitComment(instopic.name, instopic.id)">
-									<div class="input-group mb-3">
-										<input type="text" class="form-control" :placeholder=`${instopic.name}`
-											:aria-label=`${instopic.name}` :aria-describedby=`commentField${instopic.id}`
-											v-model="formComment.commentValue">
-										<div class="input-group-append">
-											<button class="btn btn-outline-secondary" type="submit"
-												:id=`commentField${instopic.id}`>Button</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
+						</form>
 						<div class="collapse mt-2" :id=`collapse${instopic.id}`>
-							<!-- <div class="text-center" v-if="instopic.comments.length == 0">
+							<div class="text-center" v-if="instopic.comments.length == 0">
 								<p>No comments</p>
 							</div>
-							<div v-else="instopic.comments.length > 0"></div> -->
+							<div v-else="instopic.comments.length > 0">
+								<ul class="comments-list">
+									<li class="comment" v-for="comment in instopic.comments">
+										<div class="row">
+											<div class="col d-flex align-items-center">
+												<a class="mr-3" href="javascript:void(0);">
+													<img class="avatar" v-if='comment.user_avatar != ""' :src="comment.user_avatar" alt="avatar">
+													<img class="avatar" style="vertical-align: unset" v-else src="/assets/profile.png"
+														alt="avatar">
+												</a>
+												<div class="pt-2">
+													<div class="comment-heading">
+														<h4 class="user">{{comment.user_name != "" ? comment.user_name : "No user name"}}</h4>
+														<h5 class="time"></h5>
+													</div>
+													<p>{{comment.coment}}</p>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>

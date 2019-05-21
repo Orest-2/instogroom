@@ -24,11 +24,14 @@ class ProfileController < ApplicationController
 
 	def update
 		current_user.profile.update_attributes(profile_params)
-		current_user.profile.avatar.purge
-		current_user.profile.avatar.attach({
-			data: params[:avatar][:data], 
-			filename: params[:avatar][:filename]
-		})
+
+		if !params[:avatar][:data].nil?
+			current_user.profile.avatar.purge
+			current_user.profile.avatar.attach({
+				data: params[:avatar][:data], 
+				filename: params[:avatar][:filename]
+			})
+		end
 		
 		render json: get_user_data(current_user.id)
 	end
