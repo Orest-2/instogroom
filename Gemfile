@@ -31,6 +31,9 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'active_storage_base64'
 
+gem 'pg', '0.18.1', group: :production
+gem 'rails_12factor', group: :production
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
