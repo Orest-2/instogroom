@@ -11,6 +11,14 @@ class InstopicsController < ApplicationController
 		render json: get_intopics(current_user.id)
 	end
 
+	def add_comment
+		instopic = Instopic.find(params[:id])
+		if !instopic.nil?
+			instopic.coments.create(user_id: current_user.id, coment: params[:coment])
+		end
+		render json: get_intopics(current_user.id)
+	end
+
 	def like
 		instopic = Instopic.find(params[:id])
 		if !instopic.likes.find_by(user_id: current_user.id)
