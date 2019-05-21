@@ -10,10 +10,10 @@ import {
 
 const http = new HttpService(BASE_URL);
 
-export function getAllProfiles() {
+export function getAllProfiles(isWatterfall) {
 	let temp = [];
 	http.get(`/explores/all_profiles`).then(data => {
-		let onlyUnfollowers = data.filter((element) => element.followed === false)
+		let onlyUnfollowers = data.filter((element) => element.followed === isWatterfall)
 		onlyUnfollowers.forEach(unfollowers => {
 			unfollowers.instopics.forEach(instopic => {
 				instopic.name = unfollowers.name;
