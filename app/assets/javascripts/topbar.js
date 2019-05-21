@@ -36,9 +36,11 @@ let app = new Vue({
 						filename: file.name
 					};
 
-					http
-						.post("/instopic/create", this.formInstopic)
-						.then(data => (store.user.instapics = data));
+					http.post("/instopic/create", this.formInstopic).then(data => {
+						$("#exampleModal").modal("hide");
+						store.user.instopics = [];
+						store.user.instopics = data;
+					});
 				};
 			}
 		}

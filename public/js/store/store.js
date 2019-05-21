@@ -1,6 +1,6 @@
 export const store = {
 	user: {
-		instapics: []
+		instopics: []
 	},
 	explore: []
 };
