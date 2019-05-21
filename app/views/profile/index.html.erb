@@ -14,11 +14,17 @@
 								: "You don't have name edit your profile"
 						}}
 					</h5>
-					<button class="btn profile-edit-btn">Edit Profile</button>
+					<button
+						data-toggle="modal"
+						data-target="#editProfileModal"
+						class="btn profile-edit-btn border"
+					>
+						Edit Profile
+					</button>
 				</div>
 
 				<div class="profile-stats">
-					<ul>
+					<ul class="p-0">
 						<li>
 							<span class="profile-stat-count">{{
 								store.user.instopics.length
@@ -46,23 +52,71 @@
 	</header>
 	<main>
 		<div class="container">
-			<!-- <div>{{ store.user.phone }}</div>
-			<div>{{ store.user.age }}</div>
-			<div>{{ store.user.sex }}</div> -->
 			<div v-for="intopic in store.user.instopics">
 				<img :src="intopic.picture" width="300" height="300" />
 				<div>{{ intopic.description }}</div>
 			</div>
-			<form @submit.prevent="submitEditUser">
-				<input @change="selectedUserAvatar($event)" type="file" name="avatar" />
-				<input v-model="formUser.name" type="text" />
-				<input v-model="formUser.age" type="number" />
-				<input v-model="formUser.sex" type="text" />
-				<button type="submit">Edit user</button>
-			</form>
 		</div>
 		<!-- End of container -->
 	</main>
+	<!-- Modal -->
+	<div
+		class="modal fade"
+		id="editProfileModal"
+		tabindex="-1"
+		role="dialog"
+		aria-labelledby="editProfileModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editProfileModalLabel">
+						Edit Profile
+					</h5>
+					<button
+						type="button"
+						class="close"
+						data-dismiss="modal"
+						aria-label="Close"
+					>
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<label>Avatar</label>
+						<file-pond
+							name="avatar"
+							ref="pond1"
+							max-file-size="5MB"
+						></file-pond>
+					</div>
+
+					<div class="form-group">
+						<label for="nameField">Name</label>
+						<input
+							v-model="formUser.name"
+							class="form-control"
+							id="nameField"
+						/>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						Close
+					</button>
+					<button
+						type="button"
+						@click="submitEditUser"
+						class="btn btn-secondary"
+					>
+						Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <%= javascript_include_tag 'profile', 'data-turbolinks-track': 'reload', 'type':
 'module' %>

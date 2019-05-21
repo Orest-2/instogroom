@@ -83,6 +83,7 @@ img {
 
 .profile-user-name {
 	display: inline-block;
+	font-size: 1.75rem;
 	font-weight: 300;
 }
 
@@ -228,8 +229,6 @@ img {
 		flex-wrap: wrap;
 		margin-top: 1rem;
 	}
-
-	.profile-user-name {	}
 
 	.profile-edit-btn {
 		order: 1;
