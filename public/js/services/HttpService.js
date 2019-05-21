@@ -18,6 +18,14 @@ export class HttpService {
 
 		const response = await fetch(url, option);
 
+		const isHtml =
+			response.headers.get("content-type").split(";")[0] === "text/html";
+
+		if (isHtml) {
+			location.href = response.url;
+			return false;
+		}
+
 		return response.json();
 	}
 

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 	delete 'instopic/delete', 		to: 'instopics#delete'
 
 	get 'explores',								to: 'explores#index'
-	get 'explores/all_profiles',	to: 'explores#get_all_profiles'
+	post 'explores/all_profiles',	to: 'explores#get_all_profiles'
 	post 'explores/follow',				to: 'explores#follow'
 	post 'explores/unfollow',			to: 'explores#unfollow'
 
