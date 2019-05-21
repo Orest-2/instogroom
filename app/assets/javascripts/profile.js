@@ -1,8 +1,17 @@
 /* eslint-disable no-unused-vars */
 // import Vue from "https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.esm.browser.js";
-import { BASE_URL } from "/js/config.js";
-import { store } from "/js/store/store.js";
-import { HttpService } from "/js/services/HttpService.js";
+import {
+	BASE_URL
+} from "/js/config.js";
+import {
+	store
+} from "/js/store/store.js";
+import {
+	HttpService
+} from "/js/services/HttpService.js";
+import {
+	getUserData
+} from "/js/common.js";
 
 const http = new HttpService(BASE_URL);
 
@@ -13,6 +22,9 @@ let app = new Vue({
 		formUser: {
 			avatar: null,
 			name: ""
+		},
+		formComment: {
+			commentValue: '',
 		}
 	},
 	components: {
@@ -45,14 +57,19 @@ let app = new Vue({
 					});
 				};
 			}
+		},
+		submitComment(instopic) {
+			let comment = `${instopic.name}, ${this.formComment.commentValue}`;
+			http.post(`/instopic/add_comment`, {
+				id: instopic.id,
+				comment
+			}).then(() => {
+				getUserData();
+				// eslint-disable-next-line no-undef
+				$(`#collapse${instopic.id}`).collapse('show');
+			});
 		}
 	}
 });
 
-let url = new URL(location.href);
-let id = url.searchParams.get("id");
-if (id) {
-	http.get(`/profile/other/${id}`).then(data => (store.user = data));
-} else {
-	http.get("/profile/get").then(data => (store.user = data));
-}
+getUserData();

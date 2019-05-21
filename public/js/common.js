@@ -25,3 +25,31 @@ export function getAllProfiles(isWatterfall) {
 		store.explore = temp;
 	});
 }
+
+export function getUserData() {
+	let url = new URL(location.href);
+	let id = url.searchParams.get("id");
+	if (id) {
+		http.get(`/profile/other/${id}`).then(data => {
+			mappedUserData(data);
+			store.user.myProfile = false;
+		});
+	} else {
+		http.get("/profile/get").then(data => {
+			mappedUserData(data);
+			store.user.myProfile = true;
+		});
+	}
+}
+
+function mappedUserData(user) {
+	let temp = [];
+	user.instopics.forEach(instopic => {
+		instopic.name = user.name;
+		instopic.avatar = user.avatar;
+		temp.push(instopic);
+	});
+	store.user.instopics = [];
+	store.user = user;
+	store.user.instopics = temp;
+}
