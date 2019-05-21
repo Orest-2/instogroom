@@ -32,12 +32,12 @@ export function getUserData() {
 	if (id) {
 		http.get(`/profile/other/${id}`).then(data => {
 			mappedUserData(data);
-			store.user.myProfile = false;
+			store.myProfile = false;
 		});
 	} else {
 		http.get("/profile/get").then(data => {
 			mappedUserData(data);
-			store.user.myProfile = true;
+			store.myProfile = true;
 		});
 	}
 }
