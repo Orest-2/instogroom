@@ -1,5 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="#">Navbar</a>
+<nav id="topbar" class="navbar navbar-expand-lg navbar-light bg-light">
+	
+	<div class="navbar-header">
+      <%= link_to image_tag("/assets/instagram-new.png", size: "30x30"), root_path %>
+    </div>
+		
+	<a href="#" class="ml-3 navbar-brand" style="
+    font-size: 2rem;
+"> Instogroom</a>
 	<button
 		class="navbar-toggler"
 		type="button"
@@ -12,52 +19,20 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<div class="navbar-item" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="#"
-					>Home <span class="sr-only">(current)</span></a
-				>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
-			</li>
-			<li class="nav-item dropdown">
-				<a
-					class="nav-link dropdown-toggle"
-					href="#"
-					id="navbarDropdown"
-					role="button"
-					data-toggle="dropdown"
-					aria-haspopup="true"
-					aria-expanded="false"
-				>
-					Dropdown
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
-				</div>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-					>Disabled</a
-				>
-			</li>
+
+		  <button type="button" class="nav-items btn btn-outline-light text-dark"><%= link_to "Explore", explores_path, class: "nav-link text-dark"  %></button>
+			<button type="button" class="nav-items btn btn-outline-light text-dark"><%= link_to "Waterfall ", root_path, class: "nav-link text-dark"  %></button>
+			
+			<button type="button" class="nav-items btn btn-outline-light text-dark"><%= link_to " Add new Instopic", profile_path, class: "nav-link text-dark"  %></button>
+		
 		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input
-				class="form-control mr-sm-2"
-				type="search"
-				placeholder="Search"
-				aria-label="Search"
-			/>
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-				Search
-			</button>
-			<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-		</form>
 	</div>
+	
+		<div class="navbar-profile">
+      <%= link_to image_tag("/assets/profile.png", size: "30x30"), root_path %>
+    </div>
 </nav>
+<%= javascript_include_tag 'topbar', 'data-turbolinks-track': 'reload', 'type':
+'module' %>
