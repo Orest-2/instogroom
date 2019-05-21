@@ -22,10 +22,10 @@
 	<div class="navbar-item" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 
-		  <button type="button" class="nav-items btn btn-outline-light text-dark"><%= link_to "Explore", explores_path, class: "nav-link text-dark"  %></button>
-			<button type="button" class="nav-items btn btn-outline-light text-dark"><%= link_to "Waterfall ", root_path, class: "nav-link text-dark"  %></button>
+		  <button type="button" class="nav-items btn btn-outline-light text-dark" data-turbolinks="false"><a href="/explores" class="nav-link text-dark">Explores</a></button>
+			<button type="button" class="nav-items btn btn-outline-light text-dark" data-turbolinks="false"><a href="/" class="nav-link text-dark">Watterfall</a></button>
 			
-			<button type="button" class="nav-items btn btn-outline-light text-dark"><%= link_to " Add new Instopic", profile_path, class: "nav-link text-dark"  %></button>
+			<button type="button" class="nav-items btn btn-outline-light text-dark" data-turbolinks="false"><a href="/profile" class="nav-link text-dark">Add new instopic</a></button>
 		
 		</ul>
 	</div>
