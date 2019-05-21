@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');
+
+.navbar-brand {
+    font-family: 'Cookie', cursive;
+    font-size: 2rem;
+}
+.navbar-item {
+    position: absolute;
+    right: 120px;
+}
+.navbar-profile {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+}
+.navbar-like {
+    position: absolute;
+    right: 80px;
+    top: 10px;
+}
+
