@@ -19,22 +19,29 @@ let app = new Vue({
 	el: "#watterfall",
 	data: {
 		store: store,
+		formComment: {
+			commentValue: '',
+		}
 	},
 	methods: {
 		follow(userId) {
 			http.post('/explores/unfollow', {
 				followed_id: userId
 			}).then(data => {
-				getAllProfiles();
+				getAllProfiles(true);
 			})
 		},
 		like(instopicId) {
-			http.get(`instopic/like/${instopicId}`).then(() => getAllProfiles());
+			http.get(`/instopic/like/${instopicId}`).then(() => getAllProfiles(true));
 		},
 		dislike(instopicId) {
-			http.get(`instopic/dislike/${instopicId}`).then(() => getAllProfiles());
+			http.get(`/instopic/dislike/${instopicId}`).then(() => getAllProfiles(true));
+		},
+		submitComment(userName, instopicId) {
+			let comment = `${userName}, ${this.formComment.commentValue}`;
+			$(`#collapse${instopicId}`).collapse('show');
 		}
 	}
 });
 
-getAllProfiles();
+getAllProfiles(true);
