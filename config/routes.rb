@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
 	get 'explores',								to: 'explores#index'
 	get 'explores/all_profiles',	to: 'explores#get_all_profiles'
+	post 'explores/add_comment',	to: 'explores#add_comment'
 	post 'explores/follow',				to: 'explores#follow'
 	post 'explores/unfollow',			to: 'explores#unfollow'
 
