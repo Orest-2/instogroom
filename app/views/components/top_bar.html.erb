@@ -22,14 +22,14 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav ml-auto">
 
-		  <li class="nav-item text-dark" data-turbolinks="false">
+		  <li class="nav-item text-dark" data-turbolinks="false" >
 				<a href="/explores" class="nav-link text-dark">Explores</a>
 			</li>
 			<li class="nav-item text-dark" data-turbolinks="false">
 				<a href="/" class="nav-link text-dark">Watterfall</a>
 			</li>
-			<li class="nav-item text-dark" data-turbolinks="false">
-				<a href="/profile" class="nav-link text-dark">Add new instopic</a>
+			<li class="nav-item text-dark" data-turbolinks="false" data-toggle="modal" data-target="#exampleModal">
+				<a href="javascript:void(0)" class="nav-link text-dark">Add new instopic</a>
 			</li>
 			<li class="nav-item text-dark" data-turbolinks="false">
       	<a href="/" class="nav-link text-dark">
@@ -41,3 +41,34 @@
 </nav>
 <%= javascript_include_tag 'topbar', 'data-turbolinks-track': 'reload', 'type':
 'module' %>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create new Instapic</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+			
+        <div class="input-group mb-3">
+  
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01">
+    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+  </div>
+</div>
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
