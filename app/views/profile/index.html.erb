@@ -1,25 +1,122 @@
 <div id="profile">
-	<img :src="store.user.avatar" />
-	<div>{{ store.user.name }}</span>
-	<div>{{ store.user.phone }}</div>
-	<div>{{ store.user.age }}</div>
-	<div>{{ store.user.sex }}</div>
-	<div v-for="intopic in store.user.instopics">
-		<img :src="intopic.picture" width="300" height="300">
-		<div>{{intopic.description}}</div>
+	<header>
+		<div class="container">
+			<div class="profile">
+				<div class="profile-image">
+					<img :src="store.user.avatar" alt="" width="150" height="150" />
+				</div>
+
+				<div class="profile-user-settings">
+					<h5 class="profile-user-name">
+						{{
+							store.user.name
+								? store.user.name
+								: "You don't have name edit your profile"
+						}}
+					</h5>
+					<button
+						data-toggle="modal"
+						data-target="#editProfileModal"
+						class="btn profile-edit-btn border"
+					>
+						Edit Profile
+					</button>
+				</div>
+
+				<div class="profile-stats">
+					<ul class="p-0">
+						<li>
+							<span class="profile-stat-count">{{
+								store.user.instopics.length
+							}}</span>
+							posts
+						</li>
+						<li>
+							<span class="profile-stat-count">{{
+								store.user.followersCount
+							}}</span>
+							followers
+						</li>
+						<li>
+							<span class="profile-stat-count">{{
+								store.user.followedCount
+							}}</span>
+							following
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- End of profile section -->
+		</div>
+		<!-- End of container -->
+	</header>
+	<main>
+		<div class="container">
+			<div v-for="intopic in store.user.instopics">
+				<img :src="intopic.picture" width="300" height="300" />
+				<div>{{ intopic.description }}</div>
+			</div>
+		</div>
+		<!-- End of container -->
+	</main>
+	<!-- Modal -->
+	<div
+		class="modal fade"
+		id="editProfileModal"
+		tabindex="-1"
+		role="dialog"
+		aria-labelledby="editProfileModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editProfileModalLabel">
+						Edit Profile
+					</h5>
+					<button
+						type="button"
+						class="close"
+						data-dismiss="modal"
+						aria-label="Close"
+					>
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<label>Avatar</label>
+						<file-pond
+							name="avatar"
+							ref="pond1"
+							max-file-size="5MB"
+						></file-pond>
+					</div>
+
+					<div class="form-group">
+						<label for="nameField">Name</label>
+						<input
+							v-model="formUser.name"
+							class="form-control"
+							id="nameField"
+						/>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">
+						Close
+					</button>
+					<button
+						type="button"
+						@click="submitEditUser"
+						class="btn btn-secondary"
+					>
+						Save
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
-	<form @submit.prevent="submitEditUser">
-		<input @change="selectedUserAvatar($event)" type="file" name="avatar" />
-		<input v-model="formUser.name" type="text" />
-		<input v-model="formUser.age" type="number" />
-		<input v-model="formUser.sex" type="text" />
-		<button type="submit">Edit user</button>
-	</form>
-	<form @submit.prevent="submitAddInstopic">
-		<input @change="selectedInstopic($event)" type="file" name="avatar" />
-		<input v-model="selectedInstopic.description" type="text" />
-		<button type="submit">Add instopic</button>
-	</form>
 </div>
 <%= javascript_include_tag 'profile', 'data-turbolinks-track': 'reload', 'type':
 'module' %>

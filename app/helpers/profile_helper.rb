@@ -5,7 +5,9 @@ module ProfileHelper
 		user.profile.attributes.merge({ 
 			avatar: avatar.attachment.nil? ? "" : url_for(avatar),
 			instopics: get_intopics(id),
-			followed: !current_user.follows.find_by(followed_id: id).nil?
+			followed: !current_user.follows.find_by(followed_id: id).nil?,
+			followersCount: current_user.follows.length,
+			followedCount: Follow.where(followed_id: current_user.id).length
 		})
 	end
 end
