@@ -1,7 +1,8 @@
 module InstopicsHelper
-	def get_intopics
+	def get_intopics(id)
 		res = []
-		current_user.instopics.each do |element|
+		user = User.find(id)
+		user.instopics.each do |element|
 			res << element.attributes.merge({
 				picture: url_for(element.picture),
 				likes: element.likes,
