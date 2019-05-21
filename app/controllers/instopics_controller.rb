@@ -12,7 +12,7 @@ class InstopicsController < ApplicationController
 	end
 
 	def like
-		instopic = current_user.instopics.find(params[:id])
+		instopic = Instopic.find(params[:id])
 		if !instopic.likes.find_by(user_id: current_user.id)
 			instopic.likes.create(user_id: current_user.id)
 		end
@@ -20,7 +20,7 @@ class InstopicsController < ApplicationController
 	end
 	
 	def dislike
-		instopic = current_user.instopics.find(params[:id])
+		instopic = Instopic.find(params[:id])
 		if !instopic.dislikes.find_by(user_id: current_user.id)
 			instopic.dislikes.create(user_id: current_user.id)
 		end
