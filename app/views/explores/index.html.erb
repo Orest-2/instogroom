@@ -26,14 +26,14 @@
 						<p>{{instopic.description != "" ? instopic.description : "No description"}}</p>
 						<div class="row">
 							<div class="col text-center d-flex flex-row align-items-center justify-content-start">
-								<a class="btn btn-primary mr-2 p-2" data-toggle="collapse" :href=`#collapse${instopic.id}` role="button"
-									aria-expanded="false" :aria-controls=`collapse${instopic.id}`>Comments</a>
+								<a class="btn btn-warning mr-2 p-2" data-toggle="collapse" :href=`#collapse${instopic.id}` role="button"
+									aria-expanded="false" :aria-controls=`collapse${instopic.id}`><i class="fas fa-comments"></i></a>
 								<button @click="follow(instopic.user_id)" class="btn btn-primary mr-2 p-2" style="float:right;"><i
 										class="fas fa-user-minus"></i></button>
 								<button @click="like(instopic.id)" class="btn btn-success mr-2 p-2" style="float:right;"><i
 										class="fas fa-thumbs-up mr-2"></i><span
 										class="badge badge-light">{{ instopic.likes.length }}</span></button>
-								<button @click="dislike(instopic.id)" class="btn btn-warning p-2" style="float:right;"><i
+								<button @click="dislike(instopic.id)" class="btn btn-danger p-2" style="float:right;"><i
 										class="fas fa-thumbs-down mr-2"></i><span
 										class="badge badge-light">{{ instopic.dislikes.length }}</span></button>
 							</div>
