@@ -1,10 +1,10 @@
 test:
-  service: Disk
-  root: <%= Rails.root.join("tmp/storage") %>
+    service: Disk
+    root: <%= Rails.root.join("tmp/storage") %>
 
 local:
-  service: Disk
-  root: <%= Rails.root.join("storage") %>
+    service: Disk
+    root: <%= Rails.root.join("storage") %>
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
@@ -15,16 +15,16 @@ local:
 #   bucket: your_own_bucket
 
 google:
-  service: GCS
-  project: instogroom
-  credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'] %>
-	bucket: instogroom-bucket
+    service: GCS
+    project: instogroom
+    credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'] %>
+    bucket: instogroom-bucket
 
 google_dev:
-  service: GCS
-  project: instogroom
-  credentials: <%= Rails.root.join("config/secrets/instogroom-app.json") %>
-  bucket: instogroom-bucket
+    service: GCS
+    project: instogroom
+    credentials: <%= Rails.root.join("config/secrets/instogroom-app.json") %>
+    bucket: instogroom-bucket
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
 # microsoft:
