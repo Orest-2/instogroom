@@ -1,6 +1,7 @@
 export const store = {
 	user: {
-		instopics: []
+		instopics: [],
+		myProfile: false
 	},
-	explore: []
+	explore: [],
 };

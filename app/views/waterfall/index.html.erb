@@ -1,5 +1,5 @@
 <div id="watterfall">
-	<div class="container">
+	<div class="container" style="margin-top: 5rem;">
 		<div class="row">
 			<div class="col-xl-12 col-md-12 mt-4 mb-4" v-for="instopic in store.explore" :key="instopic.id">
 				<div class="panel panel-white post">
@@ -11,7 +11,7 @@
 								<img v-else src="/assets/profile.png" style="width:30px; height:30px" class="img-circle avatar">
 								<div>
 									<div class="title h5">
-										<b>{{instopic.name}}</b>
+										<a :href=`/profile?id=${instopic.user_id}` style="color: black;"><b>{{instopic.name != "" ? instopic.name : "No user name"}}</b></a>
 										uploaded a photo.
 									</div>
 									<h6 class="text-muted time"></h6>
