@@ -5,7 +5,7 @@ module InstopicsHelper
 		user.instopics.each do |element|
 			res << element.attributes.merge({
 				picture: url_for(element.picture),
-				comments: element.coments
+				comments: element.coments,
 				likes: element.likes,
 				dislikes: element.dislikes 
 			})
