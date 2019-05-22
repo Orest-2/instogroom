@@ -3,5 +3,6 @@ export const store = {
 		instopics: [],
 	},
 	explore: [],
-	myProfile: false
+	myProfile: false,
+	showLoader: false
 };

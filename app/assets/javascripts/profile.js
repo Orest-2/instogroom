@@ -10,6 +10,7 @@ import {
 	HttpService
 } from "/js/services/HttpService.js";
 import {
+	getAllProfiles,
 	getUserData
 } from "/js/common.js";
 
@@ -34,7 +35,15 @@ let app = new Vue({
 		)
 	},
 	methods: {
+		unfollow(userId) {
+			http.post('/explores/unfollow', {
+				followed_id: userId
+			}).then(data => {
+				getAllProfiles(true);
+			})
+		},
 		submitEditUser() {
+			store.showLoader = true;
 			let file = this.$refs.pond1.getFiles()[0].file;
 
 			var fileSize = file.size / 1024 / 1024;
@@ -52,8 +61,9 @@ let app = new Vue({
 						$("#editProfileModal").modal("hide");
 						store.user = {};
 						store.user = data;
-
+						getUserData();
 						this.formUser.name = "";
+						store.showLoader = false;
 					});
 				};
 			}

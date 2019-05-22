@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" style="position: fixed;width: 100%;top: 0;">
 		<div class="navbar-header">
 			<a data-turbolinks="false" href="/">
-				<img src="https://storage.cloud.google.com/instogroom-bucket/images/instagram-new.png?_ga=2.203085585.-1059704573.1558457409" width="35" height="35" />
+				<img src="http://ocp.zzz.com.ua/assets/istgr/instogroom-new.png" width="35" height="35" />
 			</a>
 		</div>
 
@@ -46,7 +46,7 @@
 				</li>
 				<li class="nav-item text-dark" data-turbolinks="false">
 					<a href="/profile" class="nav-link text-dark">
-						<img src="https://storage.cloud.google.com/instogroom-bucket/images/profile.png?_ga=2.243839749.-1059704573.1558457409" width="30" height="30" />
+						<img src="http://ocp.zzz.com.ua/assets/istgr/profile.png" width="30" height="30" />
 					</a>
 				</li>
 			</ul>
@@ -76,7 +76,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" v-if="!store.showLoader">
 					<div>
 						<file-pond name="test" ref="pond" max-file-size="5MB"></file-pond>
 					</div>
@@ -89,6 +89,11 @@
 							id="exampleFormControlTextarea1"
 							rows="3"
 						></textarea>
+					</div>
+				</div>
+				<div class="modal-body" v-else>
+					<div class="spinner-border m-5" role="status">
+						<span class="sr-only">Loading...</span>
 					</div>
 				</div>
 				<div class="modal-footer">

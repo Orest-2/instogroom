@@ -24,7 +24,7 @@ let app = new Vue({
 		}
 	},
 	methods: {
-		follow(userId) {
+		unfollow(userId) {
 			http.post('/explores/unfollow', {
 				followed_id: userId
 			}).then(data => {

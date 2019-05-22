@@ -8,7 +8,7 @@
 							<div class="col d-flex flex-row align-items-center">
 								<img v-if='instopic.avatar != ""' :src="instopic.avatar" class="img-circle avatar"
 									alt="user profile image">
-								<img v-else src="https://storage.cloud.google.com/instogroom-bucket/images/profile.png?_ga=2.243839749.-1059704573.1558457409" class="img-circle avatar">
+								<img v-else src="http://ocp.zzz.com.ua/assets/istgr/profile.png" class="img-circle avatar">
 								<div>
 									<div class="title h5">
 										<a :href=`/profile?id=${instopic.user_id}` style="color: black;"><b>{{instopic.name != "" ? instopic.name : "No user name"}}</b></a>
@@ -29,7 +29,7 @@
 								<a class="btn btn-warning mr-2 p-2" data-toggle="collapse" :href=`#collapse${instopic.id}` role="button"
 									aria-expanded="false" :aria-controls=`collapse${instopic.id}`><i class="fas fa-comments"></i></a>
 								<button @click="follow(instopic.user_id)" class="btn btn-primary mr-2 p-2" style="float:right;"><i
-										class="fas fa-user-minus"></i></button>
+										class="fas fa-user-plus"></i></button>
 								<button @click="like(instopic.id)" class="btn btn-success mr-2 p-2" style="float:right;"><i
 										class="fas fa-thumbs-up mr-2"></i><span
 										class="badge badge-light">{{ instopic.likes.length }}</span></button>
@@ -60,7 +60,7 @@
 											<div class="col d-flex align-items-center">
 												<a class="mr-3" href="javascript:void(0);">
 													<img class="avatar" v-if='comment.user_avatar != ""' :src="comment.user_avatar" alt="avatar">
-													<img class="avatar" style="vertical-align: unset" v-else src="/assets/profile.png"
+													<img class="avatar" style="vertical-align: unset" v-else src="http://ocp.zzz.com.ua/assets/istgr/profile.png"
 														alt="avatar">
 												</a>
 												<div class="pt-2">
